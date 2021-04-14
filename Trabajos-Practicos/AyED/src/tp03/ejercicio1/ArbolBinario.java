@@ -72,43 +72,59 @@ public class ArbolBinario<T> {
 		return this.getDato().toString();
 	}
 
-	 
 	public boolean tieneHijoIzquierdo() {
 		return this.hijoIzquierdo!=null;
 	}
-
-	 
+ 
 	public boolean tieneHijoDerecho() {
 		return this.hijoDerecho!=null;
 	}
-
-	
 
 	public boolean esLleno() {
 		return false;
 	}
 
-	 boolean esCompleto() {
+	boolean esCompleto() {
 		return false;
 	}
 
-	
 	// imprime el árbol en preorden  
 	public void printPreorden() {
-		
+		System.out.println(this.toString());
+		if(tieneHijoIzquierdo()) {
+			this.getHijoIzquierdo().printPreorden();;
+		}
+		if(tieneHijoDerecho()) {
+			this.getHijoDerecho().printPreorden();
+		}
 	}
 
-	// imprime el �rbol en postorden
+	// imprime el árbol en postorden
 	public void printPostorden() {
-		
+		if(tieneHijoIzquierdo()) {
+			this.getHijoIzquierdo().printPostorden();
+		}
+		if(tieneHijoDerecho()) {
+			this.getHijoDerecho().printPostorden();
+		}
+		System.out.println(this.toString());
+	}
+	
+	//imprime el árbol en inorden
+	public void printInorden() {
+		if(tieneHijoIzquierdo()) {
+			this.getHijoIzquierdo().printInorden();
+		}
+		System.out.println(this.toString());
+		if(tieneHijoDerecho()) {
+			this.getHijoDerecho().printInorden();
+		}
 	}
 
-
+	
 	public void recorridoPorNiveles() {
 		
 	}
-
-	
 
 	public ListaGenerica<T> frontera() {
 		ListaGenerica<T> l = new ListaEnlazadaGenerica<T>();
@@ -116,13 +132,9 @@ public class ArbolBinario<T> {
 		return l;
 	}
 
-	
-	
-	
 	public int contarHojas() {
 		return 0;
 	}
 
-	
 
 }
