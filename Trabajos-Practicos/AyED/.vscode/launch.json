@@ -1,0 +1,70 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Ejercicio1_5",
+            "request": "launch",
+            "mainClass": "tp02.ejercicio1.Ejercicio1_5",
+            "projectName": "AyED_c69462a6"
+        },
+        {
+            "type": "java",
+            "name": "Launch Ejercicio1_6",
+            "request": "launch",
+            "mainClass": "tp02.ejercicio1.Ejercicio1_6",
+            "projectName": "AyED_c69462a6"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestListaDeEnterosConArreglos",
+            "request": "launch",
+            "mainClass": "tp02.ejercicio1.TestListaDeEnterosConArreglos",
+            "projectName": "AyED_c69462a6"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestListaDeEnterosEnlazada",
+            "request": "launch",
+            "mainClass": "tp02.ejercicio1.TestListaDeEnterosEnlazada",
+            "projectName": "AyED_c69462a6"
+        },
+        {
+            "type": "java",
+            "name": "Launch Ejercicio2_4d",
+            "request": "launch",
+            "mainClass": "tp02.ejercicio2.Ejercicio2_4d",
+            "projectName": "AyED_c69462a6"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestListaEnlazadaGenerica",
+            "request": "launch",
+            "mainClass": "tp02.ejercicio2.TestListaEnlazadaGenerica",
+            "projectName": "AyED_c69462a6"
+        },
+        {
+            "type": "java",
+            "name": "Launch Prueba",
+            "request": "launch",
+            "mainClass": "tp02.ejercicio3.Prueba",
+            "projectName": "AyED_c69462a6"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "tp02.ejercicio4.Main",
+            "projectName": "AyED_c69462a6"
+        }
+    ]
+}
