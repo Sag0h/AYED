@@ -1,5 +1,6 @@
-package tp03.ejercicio1;
+ package tp03.ejercicio1;
 
+import tp02.ejercicio3.ColaGenerica;
 import tp02.ejercicio2.ListaEnlazadaGenerica;
 import tp02.ejercicio2.ListaGenerica;
 
@@ -81,7 +82,36 @@ public class ArbolBinario<T> {
 	}
 
 	public boolean esLleno() {
-		return false;
+		ArbolBinario<T> arbol = null;
+		ColaGenerica<ArbolBinario<T>> cola = new ColaGenerica<ArbolBinario<T>>();
+		boolean lleno = true;
+		cola.encolar(this);
+		int cant_nodos = 0;
+		cola.encolar(null);
+		int nivel = 0;
+		while(!cola.esVacia() && lleno) {
+			arbol = cola.desencolar();
+			if(arbol != null) {
+				System.out.print(arbol.toString());
+				if(arbol.tieneHijoIzquierdo()) {
+					cola.encolar(arbol.getHijoIzquierdo());
+					cant_nodos++;
+				}
+				if(arbol.tieneHijoDerecho()) {
+					cola.encolar(arbol.getHijoDerecho());
+					cant_nodos++;
+				}
+			} else if(!cola.esVacia()) {
+				if(cant_nodos == Math.pow(2, ++nivel)) {
+					cola.encolar(null);
+					cant_nodos = 0;
+					System.out.println();
+				}else {
+					lleno = false;	
+				}
+			}
+		}
+		return lleno;
 	}
 
 	boolean esCompleto() {
@@ -123,7 +153,25 @@ public class ArbolBinario<T> {
 
 	
 	public void recorridoPorNiveles() {
-		
+		ArbolBinario<T> arbol = null;
+		ColaGenerica<ArbolBinario<T>> cola = new ColaGenerica<ArbolBinario<T>>();
+		cola.encolar(this);
+		cola.encolar(null);
+		while(!cola.esVacia()) {
+			arbol = cola.desencolar();
+			if(arbol != null) {
+				System.out.print(arbol.toString());
+				if(arbol.tieneHijoIzquierdo()) {
+					cola.encolar(arbol.getHijoIzquierdo());
+				}
+				if(arbol.tieneHijoDerecho()) {
+					cola.encolar(arbol.getHijoDerecho());
+				}
+			}else if(!cola.esVacia()) {
+				System.out.println();
+				cola.encolar(null);
+			}
+		}
 	}
 
 	public ListaGenerica<T> frontera() {

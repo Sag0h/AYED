@@ -8,7 +8,10 @@ public class ColaGenerica<T> {
 
     public ColaGenerica() {
         datos = new ListaEnlazadaGenerica<T>();
-
+    }
+    
+    public ColaGenerica(ListaEnlazadaGenerica<T> l) {
+        datos = l;
     }
 
     public void encolar(T elem){

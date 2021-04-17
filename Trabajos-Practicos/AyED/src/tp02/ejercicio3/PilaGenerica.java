@@ -9,6 +9,10 @@ public class PilaGenerica<T> {
     public PilaGenerica() {
         datos = new ListaEnlazadaGenerica<>();
     }
+    
+    public PilaGenerica(ListaEnlazadaGenerica<T> l) {
+    	datos = l;
+    }
 
     public void apilar(T elem){
         datos.agregarInicio(elem);
