@@ -152,7 +152,7 @@ public class ArbolBinario<T> {
 	}
 
 	
-	public void recorridoPorNiveles() {
+	public void printPorNiveles() {
 		ArbolBinario<T> arbol = null;
 		ColaGenerica<ArbolBinario<T>> cola = new ColaGenerica<ArbolBinario<T>>();
 		cola.encolar(this);
@@ -180,9 +180,18 @@ public class ArbolBinario<T> {
 		return l;
 	}
 
-	public int contarHojas() {
-		return 0;
-	}
+    public int contarHojas() { 
+        int contHI=0,contHD=0;
+        if(this.esHoja()){
+            return 1;
+        }else{
+            if(this.tieneHijoIzquierdo())
+                contHI=this.getHijoIzquierdo().contarHojas();
+            if(this.tieneHijoDerecho())
+                contHD=this.getHijoDerecho().contarHojas();
+        }
+        return contHI+contHD;
+    }
 
 
 }
