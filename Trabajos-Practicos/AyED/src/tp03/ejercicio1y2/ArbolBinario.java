@@ -1,4 +1,4 @@
- package tp03.ejercicio1;
+ package tp03.ejercicio1y2;
 
 import tp02.ejercicio3.ColaGenerica;
 import tp02.ejercicio2.ListaEnlazadaGenerica;
@@ -92,7 +92,7 @@ public class ArbolBinario<T> {
 		while(!cola.esVacia() && lleno) {
 			arbol = cola.desencolar();
 			if(arbol != null) {
-				System.out.print(arbol.toString());
+				System.out.print(arbol.getDato());
 				if(arbol.tieneHijoIzquierdo()) {
 					cola.encolar(arbol.getHijoIzquierdo());
 					cant_nodos++;
@@ -115,12 +115,43 @@ public class ArbolBinario<T> {
 	}
 
 	boolean esCompleto() {
-		return false;
+		if(this.esLleno()) {
+			return true;
+		}else {
+			ColaGenerica <ArbolBinario<T>> cola = new ColaGenerica<>(new ListaEnlazadaGenerica<>());
+			cola.encolar(this);
+
+			boolean flag = false;
+			while (!cola.esVacia()) {
+				ArbolBinario<T> curr = cola.desencolar();
+
+				if (curr.tieneHijoIzquierdo()) {
+					if (flag) {
+						return false;
+					}
+					
+					cola.encolar(curr.getHijoIzquierdo());
+				} else {
+					flag = true;
+				}
+
+				if (curr.tieneHijoDerecho()) {
+					if (flag) {
+						return false;
+					}
+
+					cola.encolar(curr.getHijoDerecho());
+				} else {
+					flag = true;
+				}
+			}
+			return true;
+		}
 	}
 
 	// imprime el árbol en preorden  
 	public void printPreorden() {
-		System.out.println(this.toString());
+		System.out.println(this.getDato());
 		if(tieneHijoIzquierdo()) {
 			this.getHijoIzquierdo().printPreorden();;
 		}
@@ -137,7 +168,7 @@ public class ArbolBinario<T> {
 		if(tieneHijoDerecho()) {
 			this.getHijoDerecho().printPostorden();
 		}
-		System.out.println(this.toString());
+		System.out.println(this.getDato());
 	}
 	
 	//imprime el árbol en inorden
@@ -145,7 +176,7 @@ public class ArbolBinario<T> {
 		if(tieneHijoIzquierdo()) {
 			this.getHijoIzquierdo().printInorden();
 		}
-		System.out.println(this.toString());
+		System.out.println(this.getDato());
 		if(tieneHijoDerecho()) {
 			this.getHijoDerecho().printInorden();
 		}
@@ -160,7 +191,7 @@ public class ArbolBinario<T> {
 		while(!cola.esVacia()) {
 			arbol = cola.desencolar();
 			if(arbol != null) {
-				System.out.print(arbol.toString());
+				System.out.print(arbol.getDato());
 				if(arbol.tieneHijoIzquierdo()) {
 					cola.encolar(arbol.getHijoIzquierdo());
 				}
@@ -193,5 +224,46 @@ public class ArbolBinario<T> {
         return contHI+contHD;
     }
 
-
-}
+    public ArbolBinario<T> espejo(){ 
+        ArbolBinario<T> arbol = new ArbolBinario<T>(this.getDato()); 
+        if(!this.esVacio()){
+                if(this.tieneHijoDerecho()){
+                    arbol.agregarHijoIzquierdo(this.getHijoDerecho().espejo());   
+                }    
+                if(this.tieneHijoIzquierdo()){
+                    arbol.agregarHijoDerecho(this.getHijoIzquierdo().espejo());
+                }   
+        }
+        return arbol;     
+    }
+    
+    public void entreNiveles(int n, int m) {
+		ArbolBinario<T> arbol = null;
+		ColaGenerica<ArbolBinario<T>> cola = new ColaGenerica<ArbolBinario<T>>();
+		cola.encolar(this);
+		cola.encolar(null);
+		int nivel = 0;
+		while(!cola.esVacia() && nivel <= m) {
+			arbol = cola.desencolar();
+			if(arbol != null) {
+				if(nivel >= n){
+					System.out.print(arbol.getDato());
+				}
+				if(arbol.tieneHijoIzquierdo()) {
+					cola.encolar(arbol.getHijoIzquierdo());
+				}
+				if(arbol.tieneHijoDerecho()) {
+					cola.encolar(arbol.getHijoDerecho());
+				}
+			} else if(!cola.esVacia()) {
+				if(nivel <= m) {
+					nivel++;
+				    if(nivel > n && nivel <= m) 
+						System.out.println("");	
+					cola.encolar(null);
+				}
+			}
+		}
+    }
+    
+} 
