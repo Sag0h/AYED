@@ -3,10 +3,15 @@ package tp02.ejercicio4;
 import tp02.ejercicio3.PilaGenerica;
 
 public class Balance {
-    PilaGenerica<Character> pila = new PilaGenerica<Character>();
+    private PilaGenerica<Character> pila;
 
-    public Balance(String str) {
-        for (int i = 0; i < str.length(); i++) {
+    public Balance() {
+    	this.pila = new PilaGenerica<Character>();
+    }
+    
+    public boolean isBalanced(String str) {
+        boolean ok = true;
+    	for (int i = 0;(i < str.length() && ok); i++) {
             switch (str.charAt(i)) {
                 case '[':
                     pila.apilar(']');
@@ -18,34 +23,28 @@ public class Balance {
                     pila.apilar('}');
                     break;
                 case ']':
-                    this.verificar(']');
+                    ok = this.verificar(']');
                     break;
                 case ')':
-                    this.verificar(')');
+                    ok = this.verificar(')');
                     break;
                 case '}':
-                    this.verificar('}');
+                    ok = this.verificar('}');
                     break;
             }
         }
         if(pila.esVacia()){
-            System.out.println("Esta Balanceado.");
-        }else
-            System.out.println("No esta balanceado.");
+            return true;
+        }
+        return ok;
     }
 
-    public void verificar(char c){
-        if(pila.esVacia()){
-            System.out.println("No esta balanceado.");
-            System.exit(0);
-        }else{
-            Character s = (Character) pila.desapilar();
-            if(c != s.charValue()){
-                System.out.println("No esta balanceado.");
-                System.exit(0);
-            }
-        }
+    private boolean verificar(char c){  	
+    	if(pila.esVacia() || (c != (Character) pila.desapilar().charValue())) 
+        	return false;
+        return true;
     }
+    
 
 }
 
