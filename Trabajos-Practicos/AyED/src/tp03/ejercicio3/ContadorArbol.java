@@ -1,66 +1,58 @@
 package tp03.ejercicio3;
 
-import tp02.ejercicio2.ListaEnlazadaGenerica;
+import tp02.ejercicio1.ListaDeEnteros;
+import tp02.ejercicio1.ListaDeEnterosEnlazada;
 import tp03.ejercicio1y2.ArbolBinario;
 
 public class ContadorArbol {
 	private ArbolBinario<Integer> arbol;
-	
-	public ContadorArbol() {
-		arbol = new ArbolBinario<Integer>();
+
+	public ContadorArbol(ArbolBinario<Integer> arbol) {
+		super();
+		this.arbol = arbol;
+	}
+
+	public ArbolBinario<Integer> getArbol() {
+		return arbol;
+	}
+
+	public void setArbol(ArbolBinario<Integer> arbol) {
+		this.arbol = arbol;
 	}
 	
-	public ContadorArbol(ArbolBinario<Integer> a) {
-		arbol = a;
-	}
-	
-	public ContadorArbol(Integer n) {
-		arbol = new ArbolBinario<Integer>(n);
-	}
-	
-	private void paresInOrden(ListaEnlazadaGenerica<Integer> l, ArbolBinario<Integer> a) {
-		if(!a.esVacio()) {
-			if(a.tieneHijoIzquierdo()) {
-				paresInOrden(l,a.getHijoIzquierdo());
+	private void numerosparesInOrden(ArbolBinario<Integer> arbol, ListaDeEnteros lista) {
+		if(!arbol.esVacio()) {
+			if(arbol.tieneHijoIzquierdo()) this.numerosparesInOrden(arbol.getHijoIzquierdo(), lista);
+			if(arbol.getDato() % 2 == 0) {
+				lista.agregarFinal(arbol.getDato());
 			}
-			if(a.getDato() % 2 == 0) {
-				l.agregarFinal(a.getDato());
-			}
-			if(a.tieneHijoDerecho()) {
-				paresInOrden(l,a.getHijoDerecho());
+			if(arbol.tieneHijoDerecho()) this.numerosparesInOrden(arbol.getHijoDerecho(), lista);
+		}
+	}
+	
+	public ListaDeEnteros numerosParesInOrden() {
+		ListaDeEnteros lista = new ListaDeEnterosEnlazada();
+		lista.comenzar();
+		this.numerosparesInOrden(arbol, lista);
+		return lista;
+		
+	}
+
+	private void numerosparesPostOrden(ArbolBinario<Integer> arbol, ListaDeEnteros lista) {
+		if(!arbol.esVacio()) {
+			if(arbol.tieneHijoIzquierdo()) this.numerosparesInOrden(arbol.getHijoIzquierdo(), lista);
+			if(arbol.tieneHijoDerecho()) this.numerosparesInOrden(arbol.getHijoDerecho(), lista);
+			if(arbol.getDato() % 2 == 0) {
+				lista.agregarFinal(arbol.getDato());
 			}
 		}
 	}
 	
-	private void paresPostOrden(ListaEnlazadaGenerica<Integer> l, ArbolBinario<Integer> a) {
-		if(!a.esVacio()) {
-			if(a.tieneHijoIzquierdo()) {
-				paresPostOrden(l,a.getHijoIzquierdo());
-			}
-			
-			if(a.tieneHijoDerecho()) {
-				paresPostOrden(l,a.getHijoDerecho());
-			}
-			
-			if(a.getDato() % 2 == 0) {
-				l.agregarFinal(a.getDato());
-			}
-		}
+	public ListaDeEnteros numerosParesPostOrden() {
+		ListaDeEnteros lista = new ListaDeEnterosEnlazada();
+		lista.comenzar();
+		this.numerosparesPostOrden(arbol, lista);
+		return lista;
 	}
-	
-	public ListaEnlazadaGenerica<Integer> numerosPares(){
-		ListaEnlazadaGenerica<Integer> l = new ListaEnlazadaGenerica<Integer>();
-		ArbolBinario<Integer> aux = arbol;
-		
-		// usar el metodo de recorrido que quiera comentando el otro 
-		
-		this.paresInOrden(l, aux);	// el metodo recursivo InOrden
-		this.paresPostOrden(l, aux); // el metodo recursivo PostOrden
-		return l;
-	}
-
-
-	
-	
 	
 }

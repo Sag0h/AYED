@@ -1,12 +1,8 @@
-package tp03.ejercicio3;
+package tp032021.ejercicio1y2;
 
-import tp02.ejercicio2.ListaEnlazadaGenerica;
-import tp03.ejercicio1y2.ArbolBinario;
-
-public class PruebaContadorArbol {
+public class Prueba {
 	
 	public static void main(String[] args) {
-		
 		ArbolBinario<Integer> arbol = new ArbolBinario<Integer>(6);
 		ArbolBinario<Integer> h1,h2;
 		h1 = new ArbolBinario<Integer>(8);
@@ -26,12 +22,21 @@ public class PruebaContadorArbol {
 		arbol.getHijoDerecho().agregarHijoIzquierdo(h1);
 		arbol.getHijoDerecho().agregarHijoDerecho(h2);
 		
-		ContadorArbol contArbol = new ContadorArbol(arbol);
+		System.out.println("Arbol por niveles: ");
+		arbol.printPorNiveles();
 		
-		ListaEnlazadaGenerica<Integer> l = contArbol.numerosPares();
+		ArbolBinario<Integer> arbolEspejo = arbol.espejo();
 		
-		System.out.println(l.toString());
+		System.out.println("");
 		
+		System.out.println("Arbol espejo: ");
+		arbolEspejo.printPorNiveles();
+		
+		int n, m;
+		n = 0;
+		m = 1;
+		System.out.println("\nArbol espejo entre niveles "+ n + " y " + m + ": ");
+		arbolEspejo.entreNiveles(n, m);
 	}
 	
 }

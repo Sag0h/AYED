@@ -1,42 +1,48 @@
 package tp03.ejercicio5;
 
-import tp02.ejercicio3.ColaGenerica;
 import tp03.ejercicio1y2.ArbolBinario;
+import tp02.ejercicio3.ColaGenerica;
 
 public class ProfundidadDeArbolBinario {
-	private ArbolBinario<Integer> arbolBinario;
+	private ArbolBinario<Integer> arbol;
 	
 	public ProfundidadDeArbolBinario() {
-		arbolBinario = new ArbolBinario<Integer>();
+		this.arbol = new ArbolBinario<Integer>();
 	}
 	
 	public ProfundidadDeArbolBinario(ArbolBinario<Integer> a) {
-		arbolBinario = a;
+		this.arbol = a;
 	}
 	
+	
 	public int sumaElementosProfundidad(int p) {
-		ArbolBinario<Integer> arbol = null;
 		ColaGenerica<ArbolBinario<Integer>> cola = new ColaGenerica<ArbolBinario<Integer>>();
-		cola.encolar(this.arbolBinario);
-		cola.encolar(null);
+		ArbolBinario<Integer> aux;
 		int nivel = 0;
 		int total = 0;
-		while(!cola.esVacia() && nivel <= p) {
-			arbol = cola.desencolar();
-			if(arbol != null) {
-				if(nivel == p) 
-					total += arbol.getDato();
-				if(arbol.tieneHijoIzquierdo()) 
-					cola.encolar(arbol.getHijoIzquierdo());
-				if(arbol.tieneHijoDerecho()) 
-					cola.encolar(arbol.getHijoDerecho());
-			}else if(!cola.esVacia())
-				if(nivel <= p) {
-					nivel++;
-					cola.encolar(null);
+		if(!this.arbol.esVacio()) {
+			cola.encolar(this.getArbol());
+			cola.encolar(null);
+			while(!cola.esVacia() && nivel > p) {
+				aux = cola.desencolar();			
+				if(aux != null) {
+					if(nivel == p) 
+						total += aux.getDato();
+					if(aux.tieneHijoIzquierdo()) 
+						cola.encolar(aux.getHijoIzquierdo());
+					if(aux.tieneHijoDerecho())
+						cola.encolar(aux.getHijoDerecho());
+				}else {
+					if(nivel++ < p) 
+						cola.encolar(null);
 				}
+			}
 		}
 		return total;
+	}
+
+	public ArbolBinario<Integer> getArbol() {
+		return arbol;
 	}
 	
 }

@@ -1,10 +1,18 @@
-package tp03.ejercicio4;
+package tp032021.ejercicio4;
 
-import tp03.ejercicio1y2.ArbolBinario;
+import tp032021.ejercicio1y2.ArbolBinario;
 
 public class RedBinariaLlena {
-	private ArbolBinario<Integer> arbol;
+	ArbolBinario<Integer> red;
 	
+	public RedBinariaLlena() {
+		red = new ArbolBinario<Integer>();
+	}
+	
+	public RedBinariaLlena(ArbolBinario<Integer> arbolLleno) {
+		red = arbolLleno;
+	}
+
 	public int getMax(ArbolBinario<Integer> a) {
 		int max1 = a.getDato();
 		int max2 = a.getDato();
@@ -16,10 +24,8 @@ public class RedBinariaLlena {
 		
 		return Math.max(max1, max2);
 	}
-		
-
 	
 	public int retardoReenvio() {
-		return this.getMax(arbol);
+		return this.getMax(red);
 	}
 }

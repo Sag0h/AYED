@@ -1,10 +1,9 @@
-package tp03.ejercicio5;
+package tp032021.ejercicio4;
 
-import tp03.ejercicio1y2.ArbolBinario;
+import tp032021.ejercicio1y2.ArbolBinario;
 
 public class Prueba {
-
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		ArbolBinario<Integer> arbol = new ArbolBinario<Integer>(10);
 		ArbolBinario<Integer> h1,h2;
 		h1 = new ArbolBinario<Integer>(20);
@@ -27,12 +26,10 @@ public class Prueba {
 		System.out.println("Arbol por niveles: ");
 		arbol.printPorNiveles();
 		
-		ProfundidadDeArbolBinario profArbol = new ProfundidadDeArbolBinario(arbol);
+		RedBinariaLlena red = new RedBinariaLlena(arbol);
 		
-		System.out.println("\nprof 0 = "+profArbol.sumaElementosProfundidad(0));
-		System.out.println("prof 1 = "+profArbol.sumaElementosProfundidad(1));
-		System.out.println("prof 2 = "+profArbol.sumaElementosProfundidad(2));
-	
+		System.out.println("\nEl retardo maximo es = "+red.retardoReenvio());
+		
+		
 	}
-
 }
