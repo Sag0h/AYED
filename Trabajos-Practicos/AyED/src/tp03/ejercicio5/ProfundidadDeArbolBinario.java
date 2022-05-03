@@ -23,7 +23,7 @@ public class ProfundidadDeArbolBinario {
 		if(!this.arbol.esVacio()) {
 			cola.encolar(this.getArbol());
 			cola.encolar(null);
-			while(!cola.esVacia() && nivel > p) {
+			while(!cola.esVacia() && nivel <= p) {
 				aux = cola.desencolar();			
 				if(aux != null) {
 					if(nivel == p) 

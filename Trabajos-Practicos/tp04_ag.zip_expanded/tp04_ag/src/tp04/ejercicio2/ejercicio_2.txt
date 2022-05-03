@@ -1,0 +1,13 @@
+	a) ¿Qué recorridos conoce para recorrer en profundidad un árbol general? Explique brevemente
+	
+	Preorden, inorden, postorden.
+	
+	b) ¿Qué recorridos conoce para recorrer por niveles un árbol general? Explique brevemente.
+	
+	Por niveles.
+	
+	c) No, el recorrido es igual pero en vez de hijo derecho, va por todos los hijos.
+
+	d) No, no es necesario que el arbol general este ordenado
+
+	e) En un arbol binario es lo mismo solo que va de 0 a 2 el grado de un nodo y del arbol es el grado del nodo con mas grado.

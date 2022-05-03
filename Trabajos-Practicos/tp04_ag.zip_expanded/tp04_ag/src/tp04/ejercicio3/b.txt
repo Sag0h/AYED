@@ -1,0 +1,1 @@
+Si se tuvieran que implementar sobre la clase de arbol, cambiaria los parametros, usaria This. para referirme al arbol, la implementacion seria muy similar.
