@@ -2,6 +2,7 @@ package tp04.ejercicio1;
 
 import tp02.ejercicio2.ListaEnlazadaGenerica;
 import tp02.ejercicio2.ListaGenerica;
+import tp02.ejercicio3.ColaGenerica;
 
 public class ArbolGeneral<T> {
 
@@ -74,18 +75,92 @@ public class ArbolGeneral<T> {
 	}
 	
 	public Integer altura() {
-		// Falta implementar..
-		return 0;
+		if(this.esHoja()) {
+			return 0;
+		}
+		int cont = 1;
+		if(this.tieneHijos()) {
+			int max = -1;
+			for(int i=1; i<=this.getHijos().tamanio(); i++) {
+				if(this.getHijos().elemento(i).altura() > max) {
+					max = this.getHijos().elemento(i).altura();
+				}
+			}
+			cont += max;
+		}
+		return cont;
 	}
 
 	public Integer nivel(T dato) {
-		// falta implementar
-		return -1;
+		ColaGenerica<ArbolGeneral<T>> cola = new ColaGenerica<ArbolGeneral<T>>();
+		if(this.getDato() == dato) return 0; 
+		int nivel = 0;
+		boolean encontre = false;
+		cola.encolar(this);
+		cola.encolar(null);
+		while(!cola.esVacia() && !encontre) {
+			ArbolGeneral<T> arbol = cola.desencolar();
+			if(arbol != null) {
+				if(arbol.getDato() == dato) {
+					encontre = true;
+				}else {
+					if(arbol.tieneHijos()) {
+						for(int i=1; i<=arbol.getHijos().tamanio(); i++) {
+							cola.encolar(arbol.getHijos().elemento(i));
+						}
+					}
+				}
+			}else {
+				if(!cola.esVacia()) cola.encolar(null);
+				nivel++;
+			}
+		}
+		if(!encontre) {
+			return -1;
+		}
+		return nivel;
 	}
 
 	public Integer ancho() {
-		// Falta implementar..
-		return 0;
+		ColaGenerica<ArbolGeneral<T>> cola = new ColaGenerica<ArbolGeneral<T>>();
+		int maxNodos = 0;
+		int nivel = 0;
+		int nivelMax = 0;
+		cola.encolar(this);
+		cola.encolar(null);
+		int nodosNivel = 0;
+		while(!cola.esVacia()) {
+			ArbolGeneral<T> arbol = cola.desencolar();
+			if(arbol != null) {
+				if(arbol.tieneHijos()) {
+					nodosNivel += arbol.getHijos().tamanio();
+					for(int i=1; i<=arbol.getHijos().tamanio(); i++) {
+						cola.encolar(arbol.getHijos().elemento(i));
+					}
+				}
+			}else {
+				if(!cola.esVacia()) cola.encolar(null);
+				nivel++;
+				if(nodosNivel >= maxNodos) {
+					maxNodos = nodosNivel;
+					nivelMax = nivel;
+				}
+				nodosNivel = 0;
+			}
+		}
+		return nivelMax;
+	}
+	
+	public void inOrden() {
+		if(!this.esVacio()) {
+			if(this.tieneHijos()) {
+				this.getHijos().elemento(1).inOrden();
+			}
+			System.out.print(this.getDato()+" - ");
+			for(int i=2; i<=this.getHijos().tamanio(); i++){
+				this.getHijos().elemento(i).inOrden();
+			}
+		}
 	}
 
 }
